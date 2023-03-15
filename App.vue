@@ -14,4 +14,7 @@
 
 <style>
 	/*每个页面公共css */
+	/*每个页面公共css */
+	@import url("./static/font/ybh/iconfont.css");
+	@import "./static/css/d-base.css";
 </style>

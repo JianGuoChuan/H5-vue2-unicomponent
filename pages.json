@@ -3,13 +3,26 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom" // 微信中浏览器自带标题，如不隐藏会出现双标题的旷世奇观
+			}
+		},{
+			"path": "pages/index/wxAuth",
+			"style": {
+				"navigationBarTitleText": "授权",
+				"navigationStyle": "custom"
+			}
+		},{
+			"path": "pages/index/wxtips",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"navigationStyle": "custom"
 			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "H5-demo",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

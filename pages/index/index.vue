@@ -1,52 +1,51 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+	<view>
+		
 	</view>
 </template>
 
 <script>
+	// getIsWxClient: 判断是否是微信环境
+	import { getIsWxClient } from "@/utils/auth.js"
+	import { fenToYuan } from "@/utils/index.js"
+	import { getJson } from "@/utils/reuqest.js"
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				isWxMustEnvironment: false, // 是否必须微信中打开
 			}
 		},
 		onLoad() {
-
+			if(!isWxMustEnvironment) return
+			console.log(getIsWxClient());
+			// 检查是否是微信环境
+			if(getIsWxClient()){
+				// 检查本地是否存在授权内容
+				if ( !uni.getStorageSync('authInfo') ) {
+					console.log('---没有授权---')
+					return uni.redirectTo({
+						url: "/pages/index/wxAuth"
+					});
+				}
+				// 已授权过用户直接获取用户信息
+				const authInfo = JSON.parse(uni.getStorageSync('authInfo'))
+				getJson('/user/getUserByUid', {
+					uid: authInfo.openid,
+					unionid: authInfo.openid
+				}, data => {});
+			}else{
+				// 非微信环境跳转授权页
+				return uni.redirectTo({
+					url: "/pages/index/wxtips"
+				});
+			}
 		},
 		methods: {
-
+			
 		}
 	}
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+	
 </style>
