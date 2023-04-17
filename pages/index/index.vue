@@ -16,8 +16,10 @@
 			}
 		},
 		onLoad() {
-			if(!isWxMustEnvironment) return
-			console.log(getIsWxClient());
+			if(!this.isWxMustEnvironment){
+				console.log('非微信环境');
+				return
+			}
 			// 检查是否是微信环境
 			if(getIsWxClient()){
 				// 检查本地是否存在授权内容
